@@ -59,6 +59,45 @@ dotter myproject --dns-only
 | `--concurrency` | 10 | Max parallel queries |
 | `--version` | — | Show version |
 
+### MCP Mode
+
+Dotter también funciona como **servidor MCP** (Model Context Protocol), permitiendo que agentes como Hermes, Claude Code o cualquier cliente MCP consulten disponibilidad de dominios.
+
+```bash
+# Iniciar servidor MCP en modo stdio
+dotter mcp
+```
+
+**Tool expuesta:**
+
+| Tool | Descripción |
+|------|-------------|
+| `check_domain` | Verifica si un dominio está disponible y sugiere TLDs alternativos |
+
+**Parámetros de `check_domain`:**
+
+| Parámetro | Tipo | Obligatorio | Default | Descripción |
+|-----------|------|-------------|---------|-------------|
+| `domain` | string | ✅ | — | Dominio a verificar |
+| `tlds` | string | ❌ | curated list | TLDs a escanear (separados por coma) |
+| `all` | boolean | ❌ | false | Escanear todos los TLDs (~70) |
+| `dns_only` | boolean | ❌ | false | Solo DNS, más rápido |
+| `timeout` | number | ❌ | 5 | Timeout por consulta (segundos) |
+| `concurrency` | number | ❌ | 10 | Consultas paralelas máximas |
+
+**Configuración en Hermes Agent:**
+
+```yaml
+# ~/.hermes/config.yaml
+mcp_servers:
+  dotter:
+    command: dotter
+    args: ["mcp"]
+    env: {}
+```
+
+Luego desde tu agente: "checa si tal dominio está libre"
+
 ### Exit Codes
 
 | Code | Meaning |

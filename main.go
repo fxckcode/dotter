@@ -9,13 +9,22 @@ import (
 	"time"
 
 	"github.com/fxckcode/dotter/checker"
+	"github.com/fxckcode/dotter/mcpserv"
 	"github.com/fxckcode/dotter/output"
 	"github.com/fxckcode/dotter/tlds"
 )
 
-const version = "0.1.0"
+const version = "0.2.0"
 
 func main() {
+	// Check for MCP subcommand before flag parsing
+	if len(os.Args) > 1 && os.Args[1] == "mcp" {
+		if err := mcpserv.Start(version); err != nil {
+			fmt.Fprintf(os.Stderr, "MCP server error: %v\n", err)
+			os.Exit(3)
+		}
+		return
+	}
 	// Flags
 	showVersion := flag.Bool("version", false, "Print version and exit")
 	tldsFlag := flag.String("tlds", "", "Comma-separated TLDs to check")

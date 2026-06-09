@@ -17,6 +17,7 @@ Thumbs.db
 # Build
 /dist/
 /releases/
+/builds/
 
 # Go workspace
 go.work
