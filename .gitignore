@@ -1,0 +1,23 @@
+# Binaries
+dotter
+dotter.exe
+*.test
+*.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+/dist/
+/releases/
+
+# Go workspace
+go.work
+go.work.sum

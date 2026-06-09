@@ -1,0 +1,17 @@
+{
+  "project": "dotter",
+  "description": "Go CLI for domain availability checking with TLD suggestions",
+  "stack": {
+    "language": "Go 1.24+",
+    "build": "go build -o dotter .",
+    "test": "go test ./...",
+    "fmt": "gofmt -s -w",
+    "deps": ["github.com/likexian/whois", "golang.org/x/sync"]
+  },
+  "sdd": {
+    "artifact_store": "files-only",
+    "chain_strategy": "single-pr",
+    "greenfield": true,
+    "init_done": true
+  }
+}
